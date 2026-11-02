@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Entidad JPA que mapea la tabla 'carritos'. */
 @Entity
 @Table(name = "carritos")
 public class CarritoEntity {

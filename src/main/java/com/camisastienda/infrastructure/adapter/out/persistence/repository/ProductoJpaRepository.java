@@ -9,10 +9,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+/** Repositorio Spring Data JPA para consultar y filtrar camisetas en la tabla 'productos'. */
 public interface ProductoJpaRepository extends JpaRepository<ProductoEntity, Long> {
 
     List<ProductoEntity> findByActivoTrue();
 
+    // Filtra productos opcionalmente por equipo, liga, nombre y estado activo
     @Query("""
             SELECT p FROM ProductoEntity p
             WHERE (:soloActivos IS NULL OR :soloActivos = false OR p.activo = true)
@@ -27,6 +29,7 @@ public interface ProductoJpaRepository extends JpaRepository<ProductoEntity, Lon
             @Param("soloActivos") Boolean soloActivos
     );
 
+    // Misma búsqueda filtrada pero con paginación (página y tamaño)
     @Query("""
             SELECT p FROM ProductoEntity p
             WHERE (:soloActivos IS NULL OR :soloActivos = false OR p.activo = true)

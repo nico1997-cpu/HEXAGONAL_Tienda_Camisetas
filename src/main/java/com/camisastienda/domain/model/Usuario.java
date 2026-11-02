@@ -5,6 +5,7 @@ import com.camisastienda.domain.exception.ReglaNegocioException;
 import java.time.Instant;
 import java.util.Objects;
 
+/** Modelo de dominio de Usuario (Java puro, sin anotaciones de BD ni Spring). */
 public class Usuario {
     private Long id;
     private String nombre;
@@ -26,10 +27,12 @@ public class Usuario {
         this.creadoEn = creadoEn != null ? creadoEn : Instant.now();
     }
 
+    // Crea un usuario nuevo listo para registrarse
     public static Usuario nuevo(String nombre, String email, String passwordHash, Rol rol) {
         return new Usuario(null, nombre, email, passwordHash, rol, Instant.now());
     }
 
+    // Valida que nombre, email y rol sean obligatorios y válidos
     private void validarDatos(String nombre, String email, Rol rol) {
         if (nombre == null || nombre.isBlank()) {
             throw new ReglaNegocioException("El nombre del usuario no puede estar vacío");

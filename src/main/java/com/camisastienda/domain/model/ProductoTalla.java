@@ -5,12 +5,13 @@ import com.camisastienda.domain.exception.StockInsuficienteException;
 
 import java.util.Objects;
 
+/** Representa el stock disponible para una talla específica de una camiseta. */
 public class ProductoTalla {
     private Long id;
     private Long productoId;
     private Talla talla;
     private int stock;
-    private Long version;
+    private Long version; // Para bloqueo optimista (evita sobreventa concurrente)
 
     public ProductoTalla() {
     }
@@ -33,6 +34,7 @@ public class ProductoTalla {
         return new ProductoTalla(null, productoId, talla, stockInicial, 0L);
     }
 
+    // Resta unidades del stock al comprar; lanza error si no alcanza
     public void descontarStock(int cantidad) {
         if (cantidad <= 0) {
             throw new ReglaNegocioException("La cantidad a descontar debe ser mayor a cero");
@@ -43,6 +45,7 @@ public class ProductoTalla {
         this.stock -= cantidad;
     }
 
+    // Suma unidades al inventario
     public void aumentarStock(int cantidad) {
         if (cantidad <= 0) {
             throw new ReglaNegocioException("La cantidad a aumentar debe ser mayor a cero");
@@ -50,6 +53,7 @@ public class ProductoTalla {
         this.stock += cantidad;
     }
 
+    // Indica si hay suficientes unidades para cubrir la cantidad pedida
     public boolean hayStock(int cantidad) {
         return cantidad > 0 && this.stock >= cantidad;
     }

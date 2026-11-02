@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 
 import java.time.Instant;
 
+/** Entidad JPA que mapea la tabla 'usuarios' en MySQL. */
 @Entity
 @Table(name = "usuarios")
 public class UsuarioEntity {

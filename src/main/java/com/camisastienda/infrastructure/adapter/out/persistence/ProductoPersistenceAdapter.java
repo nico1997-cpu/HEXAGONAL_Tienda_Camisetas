@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
+/** Adaptador de persistencia que implementa ProductoRepositoryPort usando JPA. */
 @Component
 public class ProductoPersistenceAdapter implements ProductoRepositoryPort {
 

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+/** Adaptador de persistencia que guarda y consulta el carrito del cliente en MySQL. */
 @Component
 public class CarritoPersistenceAdapter implements CarritoRepositoryPort {
 
@@ -35,6 +36,7 @@ public class CarritoPersistenceAdapter implements CarritoRepositoryPort {
         return carritoRepo.findByUsuarioId(usuarioId).map(mapper::toDomain);
     }
 
+    // Guarda el carrito sincronizando su lista de ítems con la BD
     @Override
     @Transactional
     public Carrito guardar(Carrito carrito) {

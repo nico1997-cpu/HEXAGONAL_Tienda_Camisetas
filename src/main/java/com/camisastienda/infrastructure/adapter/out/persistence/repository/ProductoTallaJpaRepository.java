@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
+/** Repositorio Spring Data JPA para consultar tallas y stock en 'producto_tallas'. */
 public interface ProductoTallaJpaRepository extends JpaRepository<ProductoTallaEntity, Long> {
     Optional<ProductoTallaEntity> findByProductoIdAndTallaIgnoreCase(Long productoId, String talla);
     List<ProductoTallaEntity> findByProductoIdAndStockGreaterThan(Long productoId, int minStock);

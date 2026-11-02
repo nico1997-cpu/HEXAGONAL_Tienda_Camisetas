@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+/** Adaptador de persistencia que conecta el puerto UsuarioRepositoryPort con MySQL vía JPA. */
 @Component
 public class UsuarioPersistenceAdapter implements UsuarioRepositoryPort {
 

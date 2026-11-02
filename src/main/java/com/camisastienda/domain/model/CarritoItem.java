@@ -5,6 +5,7 @@ import com.camisastienda.domain.exception.ReglaNegocioException;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/** Representa un renglón (producto + talla + cantidad) dentro del carrito. */
 public class CarritoItem {
     private Long id;
     private Long carritoId;
@@ -42,6 +43,7 @@ public class CarritoItem {
         return new CarritoItem(null, null, productoTallaId, nombreProducto, talla, precioUnitario, cantidad);
     }
 
+    // Reemplaza la cantidad actual por una nueva
     public void actualizarCantidad(int nuevaCantidad) {
         if (nuevaCantidad <= 0) {
             throw new ReglaNegocioException("La cantidad debe ser mayor a cero");
@@ -49,6 +51,7 @@ public class CarritoItem {
         this.cantidad = nuevaCantidad;
     }
 
+    // Suma unidades cuando el cliente agrega el mismo producto/talla otra vez
     public void sumarCantidad(int adicional) {
         if (adicional <= 0) {
             throw new ReglaNegocioException("La cantidad a sumar debe ser mayor a cero");
@@ -56,6 +59,7 @@ public class CarritoItem {
         this.cantidad += adicional;
     }
 
+    // Calcula precioUnitario * cantidad
     public BigDecimal calcularSubtotal() {
         if (this.precioUnitario == null) return BigDecimal.ZERO;
         return this.precioUnitario.multiply(BigDecimal.valueOf(this.cantidad));

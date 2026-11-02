@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.persistence.Version;
 
+/** Entidad JPA que mapea la tabla 'producto_tallas' (stock por talla). */
 @Entity
 @Table(
         name = "producto_tallas",
@@ -33,6 +34,7 @@ public class ProductoTallaEntity {
     @Column(nullable = false)
     private int stock;
 
+    // @Version activa el bloqueo optimista de Hibernate para evitar ventas simultáneas sin stock
     @Version
     @Column(nullable = false)
     private Long version = 0L;

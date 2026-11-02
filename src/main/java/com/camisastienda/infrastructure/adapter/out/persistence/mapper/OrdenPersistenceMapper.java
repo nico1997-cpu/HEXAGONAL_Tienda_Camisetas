@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/** Convierte OrdenEntity y sus ítems al modelo de dominio Orden. */
 @Component
 public class OrdenPersistenceMapper {
 

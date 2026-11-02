@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/** Orden de compra generada cuando el cliente finaliza su carrito (checkout). */
 public class Orden {
     private Long id;
     private Long usuarioId;
@@ -41,6 +42,7 @@ public class Orden {
         this.creadoEn = creadoEn != null ? creadoEn : Instant.now();
     }
 
+    // Convierte un carrito con productos en una orden en estado CREADA con precios congelados
     public static Orden crearDesdeCarrito(Carrito carrito, Long usuarioId) {
         if (carrito == null || carrito.estaVacio()) {
             throw new CarritoVacioException("No se puede generar una orden a partir de un carrito vacío");
@@ -56,6 +58,7 @@ public class Orden {
         return new Orden(null, usuarioId, ordenItems, totalCalculado, EstadoOrden.CREADA, Instant.now());
     }
 
+    // Cancela la orden si aún no ha sido completada
     public void cancelar() {
         if (EstadoOrden.COMPLETADA.equals(this.estado)) {
             throw new ReglaNegocioException("No se puede cancelar una orden que ya fue completada");
@@ -66,6 +69,7 @@ public class Orden {
         this.estado = EstadoOrden.CANCELADA;
     }
 
+    // Marca la orden como pagada
     public void pagar() {
         if (!EstadoOrden.CREADA.equals(this.estado)) {
             throw new ReglaNegocioException("Solo se pueden pagar órdenes en estado CREADA");
@@ -73,6 +77,7 @@ public class Orden {
         this.estado = EstadoOrden.PAGADA;
     }
 
+    // Marca la orden como completada/entregada
     public void completar() {
         if (!EstadoOrden.PAGADA.equals(this.estado) && !EstadoOrden.CREADA.equals(this.estado)) {
             throw new ReglaNegocioException("Solo órdenes pagadas o creadas pueden ser completadas");

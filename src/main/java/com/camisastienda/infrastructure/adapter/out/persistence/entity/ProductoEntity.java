@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Entidad JPA que mapea la tabla 'productos' (camisetas) y su relación con tallas. */
 @Entity
 @Table(name = "productos")
 public class ProductoEntity {
@@ -50,6 +51,7 @@ public class ProductoEntity {
     @Column(name = "creado_en", nullable = false)
     private Instant creadoEn;
 
+    // Relación 1 a muchos con las tallas del producto
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ProductoTallaEntity> tallas = new ArrayList<>();
 

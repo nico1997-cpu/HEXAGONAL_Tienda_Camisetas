@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/** Carrito de compras de un cliente; agrupa ítems y calcula el total a pagar. */
 public class Carrito {
     private Long id;
     private Long usuarioId;
@@ -34,6 +35,7 @@ public class Carrito {
         return new Carrito(null, usuarioId, new ArrayList<>(), Instant.now());
     }
 
+    // Agrega un ítem; si ya existe esa talla en el carrito, suma las cantidades
     public void agregarItem(CarritoItem nuevoItem) {
         if (nuevoItem == null) {
             throw new ReglaNegocioException("El ítem a agregar no puede ser nulo");
@@ -48,6 +50,7 @@ public class Carrito {
         this.actualizadoEn = Instant.now();
     }
 
+    // Cambia la cantidad de un ítem existente
     public void actualizarCantidad(Long productoTallaId, int nuevaCantidad) {
         CarritoItem item = buscarItemPorProductoTalla(productoTallaId)
                 .orElseThrow(() -> new ReglaNegocioException("El producto no se encuentra en el carrito"));
@@ -55,6 +58,7 @@ public class Carrito {
         this.actualizadoEn = Instant.now();
     }
 
+    // Elimina un producto/talla del carrito
     public void quitarItem(Long productoTallaId) {
         boolean removido = this.items.removeIf(item -> Objects.equals(item.getProductoTallaId(), productoTallaId));
         if (!removido) {
@@ -63,11 +67,13 @@ public class Carrito {
         this.actualizadoEn = Instant.now();
     }
 
+    // Limpia todos los productos del carrito (ej. tras hacer checkout)
     public void vaciar() {
         this.items.clear();
         this.actualizadoEn = Instant.now();
     }
 
+    // Suma los subtotales de todos los ítems
     public BigDecimal calcularTotal() {
         return this.items.stream()
                 .map(CarritoItem::calcularSubtotal)

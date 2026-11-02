@@ -1,5 +1,6 @@
 package com.camisastienda.domain.exception;
 
+/** Se lanza cuando no hay suficiente stock para una talla solicitada (HTTP 409). */
 public class StockInsuficienteException extends ReglaNegocioException {
     public StockInsuficienteException(String mensaje) {
         super(mensaje);

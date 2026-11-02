@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/** Modelo de dominio de una camiseta de fútbol con su lista de tallas y stock. */
 public class Producto {
     private Long id;
     private String nombre;
@@ -49,6 +50,7 @@ public class Producto {
         return new Producto(null, nombre, descripcion, equipo, liga, temporada, precio, imagenUrl, true, new ArrayList<>(), Instant.now());
     }
 
+    // Valida datos obligatorios y que el precio no sea negativo
     private void validarCampos(String nombre, String equipo, String liga, String temporada, BigDecimal precio) {
         if (nombre == null || nombre.isBlank()) {
             throw new ReglaNegocioException("El nombre del producto no puede estar vacío");
@@ -67,6 +69,7 @@ public class Producto {
         }
     }
 
+    // Agrega una talla al producto verificando que no esté repetida
     public void agregarTalla(ProductoTalla nuevaTalla) {
         if (nuevaTalla == null) {
             throw new ReglaNegocioException("La talla a agregar no puede ser nula");
@@ -79,6 +82,7 @@ public class Producto {
         this.tallas.add(nuevaTalla);
     }
 
+    // Busca una talla específica dentro del producto
     public Optional<ProductoTalla> buscarTalla(Talla talla) {
         if (talla == null) return Optional.empty();
         return this.tallas.stream()
@@ -86,6 +90,7 @@ public class Producto {
                 .findFirst();
     }
 
+    // Indica si el producto está activo y tiene al menos una talla con stock > 0
     public boolean tieneStockDisponible() {
         return this.activo && this.tallas.stream().anyMatch(t -> t.getStock() > 0);
     }

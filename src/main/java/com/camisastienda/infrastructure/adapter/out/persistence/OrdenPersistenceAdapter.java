@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/** Adaptador de persistencia que guarda y consulta órdenes de compra en MySQL. */
 @Component
 public class OrdenPersistenceAdapter implements OrdenRepositoryPort {
 
@@ -31,6 +32,7 @@ public class OrdenPersistenceAdapter implements OrdenRepositoryPort {
         this.mapper = mapper;
     }
 
+    // Guarda la orden y todos sus ítems en una sola transacción
     @Override
     @Transactional
     public Orden guardar(Orden orden) {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.List;
 
+/** Convierte CarritoEntity y sus ítems al modelo de dominio Carrito. */
 @Component
 public class CarritoPersistenceMapper {
 

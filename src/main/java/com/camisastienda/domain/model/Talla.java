@@ -1,5 +1,6 @@
 package com.camisastienda.domain.model;
 
+/** Tallas permitidas para las camisetas deportivas. */
 public enum Talla {
     XS,
     S,
@@ -8,6 +9,7 @@ public enum Talla {
     XL,
     XXL;
 
+    // Convierte un texto (ej. "m") al enum Talla validando que exista
     public static Talla desdeTexto(String texto) {
         if (texto == null || texto.isBlank()) {
             throw new IllegalArgumentException("La talla no puede ser vacía");

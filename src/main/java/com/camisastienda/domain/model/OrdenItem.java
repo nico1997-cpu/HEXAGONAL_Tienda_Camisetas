@@ -5,6 +5,7 @@ import com.camisastienda.domain.exception.ReglaNegocioException;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/** Detalle de una camiseta comprada en una orden; guarda el precio congelado al comprar. */
 public class OrdenItem {
     private Long id;
     private Long ordenId;
@@ -37,6 +38,7 @@ public class OrdenItem {
         this.precioUnitario = precioUnitario;
     }
 
+    // Copia los datos de un ítem del carrito congelando su precio actual
     public static OrdenItem desdeCarritoItem(CarritoItem item) {
         if (item == null) {
             throw new ReglaNegocioException("El ítem de carrito no puede ser nulo");

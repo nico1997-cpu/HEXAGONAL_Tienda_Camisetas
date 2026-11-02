@@ -5,6 +5,7 @@ import com.camisastienda.domain.model.Usuario;
 import com.camisastienda.infrastructure.adapter.out.persistence.entity.UsuarioEntity;
 import org.springframework.stereotype.Component;
 
+/** Convierte entre Usuario (dominio) y UsuarioEntity (base de datos). */
 @Component
 public class UsuarioPersistenceMapper {
 

@@ -6,6 +6,7 @@ import com.camisastienda.domain.model.ProductoTalla;
 import java.util.List;
 import java.util.Optional;
 
+/** Puerto de salida para guardar y consultar productos y sus tallas/stock. */
 public interface ProductoRepositoryPort {
     Optional<Producto> buscarPorId(Long id);
     List<Producto> listarTodos(boolean soloActivos);

@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
 
+/** Entidad JPA que mapea la tabla 'orden_items' (detalle comprado en una orden). */
 @Entity
 @Table(name = "orden_items")
 public class OrdenItemEntity {

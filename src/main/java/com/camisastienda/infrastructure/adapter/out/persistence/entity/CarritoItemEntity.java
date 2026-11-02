@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
+/** Entidad JPA que mapea la tabla 'carrito_items' (productos dentro del carrito). */
 @Entity
 @Table(
         name = "carrito_items",

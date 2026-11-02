@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/** Convierte entre Producto/ProductoTalla (dominio) y sus entidades JPA. */
 @Component
 public class ProductoPersistenceMapper {
 

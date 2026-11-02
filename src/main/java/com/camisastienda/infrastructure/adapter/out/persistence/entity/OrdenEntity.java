@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Entidad JPA que mapea la tabla 'ordenes'. */
 @Entity
 @Table(name = "ordenes")
 public class OrdenEntity {
