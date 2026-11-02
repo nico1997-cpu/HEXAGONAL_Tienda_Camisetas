@@ -11,6 +11,8 @@ public interface ProductoRepositoryPort {
     Optional<Producto> buscarPorId(Long id);
     List<Producto> listarTodos(boolean soloActivos);
     List<Producto> buscarConFiltros(String equipo, String liga, String nombre, Boolean soloActivos);
+    List<Producto> buscarConFiltrosPaginado(String equipo, String liga, String nombre,
+                                            Boolean soloActivos, int page, int size);
     Producto guardar(Producto producto);
     void eliminarPorId(Long id);
 

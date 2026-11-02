@@ -1,5 +1,6 @@
 package com.camisastienda.infrastructure.adapter.in.web.error;
 
+import com.camisastienda.domain.exception.CredencialesInvalidasException;
 import com.camisastienda.domain.exception.RecursoNoEncontradoException;
 import com.camisastienda.domain.exception.ReglaNegocioException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +26,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RecursoNoEncontradoException.class)
     public ResponseEntity<ErrorResponse> handleNotFound(RecursoNoEncontradoException ex, HttpServletRequest req) {
         return build(HttpStatus.NOT_FOUND, ex.getMessage(), req, null);
+    }
+
+    @ExceptionHandler(CredencialesInvalidasException.class)
+    public ResponseEntity<ErrorResponse> handleCredencialesInvalidas(CredencialesInvalidasException ex, HttpServletRequest req) {
+        return build(HttpStatus.UNAUTHORIZED, ex.getMessage(), req, null);
     }
 
     @ExceptionHandler(ReglaNegocioException.class)
