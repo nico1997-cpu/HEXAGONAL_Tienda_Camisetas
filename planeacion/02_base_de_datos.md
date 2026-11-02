@@ -1,9 +1,9 @@
 # 02 - Base de datos (MySQL)
 
 ## Tareas
-- [ ] Crear carpeta `database/` con `schema.sql` (script completo, independiente, ejecutable a mano en MySQL).
-- [ ] Copiar/vincular como migración Flyway `src/main/resources/db/migration/V1__schema.sql`.
-- [ ] `database/data.sql` con datos de ejemplo (camisetas, tallas, usuario admin) → `V2__datos_iniciales.sql`.
+- [x] Crear carpeta `database/` con `schema.sql` (script completo, independiente, ejecutable a mano en MySQL).
+- [x] Copiar/vincular como migración Flyway `src/main/resources/db/migration/V1__schema.sql`.
+- [x] `database/data.sql` con datos de ejemplo (camisetas, tallas, usuario admin) → `V2__datos_iniciales.sql`.
 
 ## Tablas
 | Tabla | Campos principales |
