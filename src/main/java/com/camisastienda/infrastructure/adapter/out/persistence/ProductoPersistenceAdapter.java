@@ -9,6 +9,7 @@ import com.camisastienda.infrastructure.adapter.out.persistence.entity.ProductoT
 import com.camisastienda.infrastructure.adapter.out.persistence.mapper.ProductoPersistenceMapper;
 import com.camisastienda.infrastructure.adapter.out.persistence.repository.ProductoJpaRepository;
 import com.camisastienda.infrastructure.adapter.out.persistence.repository.ProductoTallaJpaRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -44,6 +45,16 @@ public class ProductoPersistenceAdapter implements ProductoRepositoryPort {
     @Override
     public List<Producto> buscarConFiltros(String equipo, String liga, String nombre, Boolean soloActivos) {
         return productoRepo.buscarConFiltros(equipo, liga, nombre, soloActivos)
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public List<Producto> buscarConFiltrosPaginado(String equipo, String liga, String nombre,
+                                                   Boolean soloActivos, int page, int size) {
+        return productoRepo.buscarConFiltrosPaginado(equipo, liga, nombre, soloActivos,
+                        PageRequest.of(page, size))
                 .stream()
                 .map(mapper::toDomain)
                 .toList();
