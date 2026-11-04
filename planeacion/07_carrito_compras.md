@@ -12,10 +12,10 @@ Un carrito por usuario, persistido en BD.
 | DELETE | `/api/carrito` | Vaciar |
 
 ## Tareas
-- [ ] Casos de uso del carrito.
-- [ ] Validar que la cantidad no supere el stock disponible al agregar (el stock **no** se reserva aquí, se descuenta en checkout).
-- [ ] Si el mismo producto+talla ya existe, sumar cantidad.
+- [x] Casos de uso del carrito.
+- [x] Validar que la cantidad no supere el stock disponible al agregar (el stock **no** se reserva aquí, se descuenta en checkout).
+- [x] Si el mismo producto+talla ya existe, sumar cantidad.
 
 ## Pruebas
-- **Unitarias**: agregar, sumar duplicados, superar stock, total correcto.
-- **Integración**: flujo completo con token de CLIENTE; un usuario no ve el carrito de otro.
+- [x] **Unitarias**: agregar, sumar duplicados, superar stock, total correcto.
+- [x] **Integración**: flujo completo con token de CLIENTE; un usuario no ve el carrito de otro.

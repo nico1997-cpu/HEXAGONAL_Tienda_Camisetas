@@ -11,10 +11,10 @@
 | PATCH | `/api/productos/{id}/tallas/{talla}/stock` | ADMIN (ajustar stock) |
 
 ## Tareas
-- [ ] Casos de uso: listar, ver detalle, crear, actualizar, eliminar, ajustar stock.
-- [ ] DTOs con Bean Validation (nombre obligatorio, precio ≥ 0, stock ≥ 0, talla válida).
-- [ ] Controlador REST + documentación Swagger.
+- [x] Casos de uso: listar, ver detalle, crear, actualizar, eliminar, ajustar stock.
+- [x] DTOs con Bean Validation (nombre obligatorio, precio ≥ 0, stock ≥ 0, talla válida).
+- [x] Controlador REST + documentación Swagger.
 
 ## Pruebas
-- **Unitarias**: servicios con puertos mockeados (crear, stock negativo rechazado, producto inexistente).
-- **Integración**: MockMvc + MySQL: CRUD completo como ADMIN, listado/filtros públicos, validaciones 400.
+- [x] **Unitarias**: servicios con puertos mockeados (crear, stock negativo rechazado, producto inexistente).
+- [x] **Integración**: MockMvc + MySQL: CRUD completo como ADMIN, listado/filtros públicos, validaciones 400.
