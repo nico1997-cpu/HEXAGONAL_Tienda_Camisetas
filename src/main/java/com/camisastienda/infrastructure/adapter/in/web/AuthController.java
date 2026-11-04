@@ -1,8 +1,8 @@
 package com.camisastienda.infrastructure.adapter.in.web;
 
 import com.camisastienda.application.port.out.TokenProviderPort;
-import com.camisastienda.application.usecase.LoginUseCase;
-import com.camisastienda.application.usecase.RegistrarUsuarioUseCase;
+import com.camisastienda.application.port.in.LoginPort;
+import com.camisastienda.application.port.in.RegistrarUsuarioPort;
 import com.camisastienda.domain.model.Usuario;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -27,13 +27,13 @@ import java.time.Instant;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final RegistrarUsuarioUseCase registrarUsuario;
-    private final LoginUseCase login;
+    private final RegistrarUsuarioPort registrarUsuario;
+    private final LoginPort login;
     private final TokenProviderPort tokenProvider;
     private final long expirationMs;
 
-    public AuthController(RegistrarUsuarioUseCase registrarUsuario,
-                          LoginUseCase login,
+    public AuthController(RegistrarUsuarioPort registrarUsuario,
+                          LoginPort login,
                           TokenProviderPort tokenProvider,
                           @Value("${app.jwt.expiration-ms}") long expirationMs) {
         this.registrarUsuario = registrarUsuario;

@@ -1,5 +1,6 @@
 package com.camisastienda.application.usecase;
 
+import com.camisastienda.application.port.in.RegistrarUsuarioPort;
 import com.camisastienda.application.port.out.PasswordEncoderPort;
 import com.camisastienda.application.port.out.UsuarioRepositoryPort;
 import com.camisastienda.domain.exception.ReglaNegocioException;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class RegistrarUsuarioUseCase {
+public class RegistrarUsuarioUseCase implements RegistrarUsuarioPort {
 
     private final UsuarioRepositoryPort usuarioRepository;
     private final PasswordEncoderPort passwordEncoder;
@@ -25,6 +26,7 @@ public class RegistrarUsuarioUseCase {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Override
     public Usuario ejecutar(String nombre, String email, String passwordPlano) {
         if (usuarioRepository.existePorEmail(email)) {
             throw new ReglaNegocioException("Ya existe un usuario registrado con el email: " + email);

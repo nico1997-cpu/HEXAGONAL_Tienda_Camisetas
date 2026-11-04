@@ -1,11 +1,11 @@
 package com.camisastienda.infrastructure.adapter.in.web;
 
-import com.camisastienda.application.usecase.ActualizarProductoUseCase;
-import com.camisastienda.application.usecase.AjustarStockUseCase;
-import com.camisastienda.application.usecase.CrearProductoUseCase;
-import com.camisastienda.application.usecase.EliminarProductoUseCase;
-import com.camisastienda.application.usecase.ListarProductosUseCase;
-import com.camisastienda.application.usecase.VerDetalleProductoUseCase;
+import com.camisastienda.application.port.in.ActualizarProductoPort;
+import com.camisastienda.application.port.in.AjustarStockPort;
+import com.camisastienda.application.port.in.CrearProductoPort;
+import com.camisastienda.application.port.in.EliminarProductoPort;
+import com.camisastienda.application.port.in.ListarProductosPort;
+import com.camisastienda.application.port.in.VerDetalleProductoPort;
 import com.camisastienda.domain.model.Producto;
 import com.camisastienda.domain.model.ProductoTalla;
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,19 +43,19 @@ import java.util.List;
 @Tag(name = "Productos", description = "Catálogo de camisetas de fútbol y gestión de stock")
 public class ProductoController {
 
-    private final ListarProductosUseCase listar;
-    private final VerDetalleProductoUseCase verDetalle;
-    private final CrearProductoUseCase crear;
-    private final ActualizarProductoUseCase actualizar;
-    private final EliminarProductoUseCase eliminar;
-    private final AjustarStockUseCase ajustarStock;
+    private final ListarProductosPort listar;
+    private final VerDetalleProductoPort verDetalle;
+    private final CrearProductoPort crear;
+    private final ActualizarProductoPort actualizar;
+    private final EliminarProductoPort eliminar;
+    private final AjustarStockPort ajustarStock;
 
-    public ProductoController(ListarProductosUseCase listar,
-                              VerDetalleProductoUseCase verDetalle,
-                              CrearProductoUseCase crear,
-                              ActualizarProductoUseCase actualizar,
-                              EliminarProductoUseCase eliminar,
-                              AjustarStockUseCase ajustarStock) {
+    public ProductoController(ListarProductosPort listar,
+                              VerDetalleProductoPort verDetalle,
+                              CrearProductoPort crear,
+                              ActualizarProductoPort actualizar,
+                              EliminarProductoPort eliminar,
+                              AjustarStockPort ajustarStock) {
         this.listar = listar;
         this.verDetalle = verDetalle;
         this.crear = crear;

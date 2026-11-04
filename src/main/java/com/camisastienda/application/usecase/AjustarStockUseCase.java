@@ -1,5 +1,6 @@
 package com.camisastienda.application.usecase;
 
+import com.camisastienda.application.port.in.AjustarStockPort;
 import com.camisastienda.application.port.out.ProductoRepositoryPort;
 import com.camisastienda.domain.exception.ProductoNoEncontradoException;
 import com.camisastienda.domain.exception.ReglaNegocioException;
@@ -16,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class AjustarStockUseCase {
+public class AjustarStockUseCase implements AjustarStockPort {
 
     private final ProductoRepositoryPort productoRepository;
 
@@ -24,6 +25,7 @@ public class AjustarStockUseCase {
         this.productoRepository = productoRepository;
     }
 
+    @Override
     public ProductoTalla ejecutar(Long productoId, String tallaStr, int nuevoStock) {
         if (nuevoStock < 0) {
             throw new ReglaNegocioException("El stock no puede ser negativo");

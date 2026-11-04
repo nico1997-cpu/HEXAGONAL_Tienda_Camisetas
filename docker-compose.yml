@@ -1,0 +1,43 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: camisas-tienda-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-camisas_tienda}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-23242526}
+      MYSQL_USER: tienda_user # Usuario secundario de la aplicación
+      MYSQL_PASSWORD: 23242526 # Contraseña del usuario secundario
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p$${MYSQL_ROOT_PASSWORD:-23242526}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: camisas-tienda-api
+    restart: on-failure
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-camisas_tienda}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:-23242526}
+      JWT_SECRET: ${JWT_SECRET:-este-es-un-secreto-seguro-de-al-menos-32-bytes-para-jwt}
+      JWT_EXPIRATION: ${JWT_EXPIRATION:-3600000}
+      SERVER_PORT: ${SERVER_PORT:-8080}
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+
+volumes:
+  mysql_data:

@@ -1,5 +1,6 @@
 package com.camisastienda.application.usecase;
 
+import com.camisastienda.application.port.in.LoginPort;
 import com.camisastienda.application.port.out.PasswordEncoderPort;
 import com.camisastienda.application.port.out.TokenProviderPort;
 import com.camisastienda.application.port.out.UsuarioRepositoryPort;
@@ -14,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(readOnly = true)
-public class LoginUseCase {
+public class LoginUseCase implements LoginPort {
 
     private final UsuarioRepositoryPort usuarioRepository;
     private final PasswordEncoderPort passwordEncoder;
@@ -28,6 +29,7 @@ public class LoginUseCase {
         this.tokenProvider = tokenProvider;
     }
 
+    @Override
     public String ejecutar(String email, String passwordPlano) {
         Usuario usuario = usuarioRepository.buscarPorEmail(email)
                 .orElseThrow(CredencialesInvalidasException::new);

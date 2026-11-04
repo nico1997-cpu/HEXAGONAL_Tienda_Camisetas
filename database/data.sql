@@ -6,10 +6,12 @@
 
 USE camisas_tienda;
 
--- 1. Usuarios iniciales (Contraseñas con hash BCrypt: admin123 y cliente123)
+-- 1. Usuarios iniciales con contraseñas BCrypt válidas:
+--    admin@camisastienda.com   -> admin123
+--    cliente@camisastienda.com -> cliente123
 INSERT INTO usuarios (id, nombre, email, password_hash, rol, creado_en) VALUES
-(1, 'Administrador del Sistema', 'admin@camisastienda.com', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8iAt6Z5EHsM8lE9lBOsl7iKTVKIUi', 'ADMIN', CURRENT_TIMESTAMP),
-(2, 'Cliente de Prueba', 'cliente@camisastienda.com', '$2a$10$wN9iL6qg8N8XkX7hK5iB3.H7LgV7g2sZg8R2c6R.nU9zO1Bv4N5re', 'CLIENTE', CURRENT_TIMESTAMP);
+(1, 'Administrador del Sistema', 'admin@camisastienda.com', '$2a$10$P0Ep8KE0ji4byD0SzU.TBeEEnnZqS3q2jJP3DkkaM3NC7bLgYfw2i', 'ADMIN', CURRENT_TIMESTAMP),
+(2, 'Cliente de Prueba', 'cliente@camisastienda.com', '$2a$10$nbY/o.QhfaFd70b/m4p9QeiJzA3Wd0TClQJtSArpR7.1CEr65zuJG', 'CLIENTE', CURRENT_TIMESTAMP);
 
 -- 2. Catálogo de Camisetas
 INSERT INTO productos (id, nombre, descripcion, equipo, liga, temporada, precio, imagen_url, activo, creado_en) VALUES

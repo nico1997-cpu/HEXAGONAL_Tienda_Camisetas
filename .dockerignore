@@ -1,0 +1,12 @@
+target/
+.git/
+.gitignore
+.idea/
+.vscode/
+*.log
+.env
+database/
+planeacion/
+scripts/
+README.md
+

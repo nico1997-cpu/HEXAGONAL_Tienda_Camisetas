@@ -1,5 +1,6 @@
 package com.camisastienda.application.usecase;
 
+import com.camisastienda.application.port.in.CrearProductoPort;
 import com.camisastienda.application.port.out.ProductoRepositoryPort;
 import com.camisastienda.domain.model.Producto;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
  */
 @Service
 @Transactional
-public class CrearProductoUseCase {
+public class CrearProductoUseCase implements CrearProductoPort {
 
     private final ProductoRepositoryPort productoRepository;
 
@@ -21,6 +22,7 @@ public class CrearProductoUseCase {
         this.productoRepository = productoRepository;
     }
 
+    @Override
     public Producto ejecutar(String nombre, String descripcion, String equipo, String liga,
                              String temporada, BigDecimal precio, String imagenUrl) {
         Producto nuevo = Producto.nuevo(nombre, descripcion, equipo, liga, temporada, precio, imagenUrl);

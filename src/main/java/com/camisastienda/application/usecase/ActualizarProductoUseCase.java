@@ -1,5 +1,6 @@
 package com.camisastienda.application.usecase;
 
+import com.camisastienda.application.port.in.ActualizarProductoPort;
 import com.camisastienda.application.port.out.ProductoRepositoryPort;
 import com.camisastienda.domain.exception.ProductoNoEncontradoException;
 import com.camisastienda.domain.model.Producto;
@@ -14,7 +15,7 @@ import java.math.BigDecimal;
  */
 @Service
 @Transactional
-public class ActualizarProductoUseCase {
+public class ActualizarProductoUseCase implements ActualizarProductoPort {
 
     private final ProductoRepositoryPort productoRepository;
 
@@ -22,6 +23,7 @@ public class ActualizarProductoUseCase {
         this.productoRepository = productoRepository;
     }
 
+    @Override
     public Producto ejecutar(Long id, String nombre, String descripcion, String equipo,
                              String liga, String temporada, BigDecimal precio, String imagenUrl) {
         Producto producto = productoRepository.buscarPorId(id)

@@ -50,7 +50,7 @@ public class Carrito {
         this.actualizadoEn = Instant.now();
     }
 
-    // Cambia la cantidad de un ítem existente
+    // Cambia la cantidad de un ítem existente (por productoTallaId — usado en dominio y CarritoTest)
     public void actualizarCantidad(Long productoTallaId, int nuevaCantidad) {
         CarritoItem item = buscarItemPorProductoTalla(productoTallaId)
                 .orElseThrow(() -> new ReglaNegocioException("El producto no se encuentra en el carrito"));
@@ -58,7 +58,7 @@ public class Carrito {
         this.actualizadoEn = Instant.now();
     }
 
-    // Elimina un producto/talla del carrito
+    // Elimina un producto/talla del carrito (por productoTallaId — usado en dominio y CarritoTest)
     public void quitarItem(Long productoTallaId) {
         boolean removido = this.items.removeIf(item -> Objects.equals(item.getProductoTallaId(), productoTallaId));
         if (!removido) {
@@ -93,6 +93,31 @@ public class Carrito {
         return this.items.stream()
                 .filter(i -> Objects.equals(i.getProductoTallaId(), productoTallaId))
                 .findFirst();
+    }
+
+    // Busca un ítem por su ID de fila (usado por los endpoints PUT y DELETE /items/{itemId})
+    public Optional<CarritoItem> buscarItemPorId(Long itemId) {
+        if (itemId == null) return Optional.empty();
+        return this.items.stream()
+                .filter(i -> Objects.equals(i.getId(), itemId))
+                .findFirst();
+    }
+
+    // Reemplaza la cantidad de un ítem buscado por su ID de fila
+    public void actualizarCantidadPorItemId(Long itemId, int nuevaCantidad) {
+        CarritoItem item = buscarItemPorId(itemId)
+                .orElseThrow(() -> new ReglaNegocioException("El ítem no se encuentra en el carrito"));
+        item.actualizarCantidad(nuevaCantidad);
+        this.actualizadoEn = Instant.now();
+    }
+
+    // Elimina un ítem buscado por su ID de fila
+    public void quitarItemPorItemId(Long itemId) {
+        boolean removido = this.items.removeIf(item -> Objects.equals(item.getId(), itemId));
+        if (!removido) {
+            throw new ReglaNegocioException("El ítem a eliminar no existe en el carrito");
+        }
+        this.actualizadoEn = Instant.now();
     }
 
     public Long getId() {

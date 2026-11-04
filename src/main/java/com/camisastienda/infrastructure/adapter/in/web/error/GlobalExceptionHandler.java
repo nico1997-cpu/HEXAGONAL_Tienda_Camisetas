@@ -3,12 +3,14 @@ package com.camisastienda.infrastructure.adapter.in.web.error;
 import com.camisastienda.domain.exception.CredencialesInvalidasException;
 import com.camisastienda.domain.exception.RecursoNoEncontradoException;
 import com.camisastienda.domain.exception.ReglaNegocioException;
+import jakarta.persistence.OptimisticLockException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -36,6 +38,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ReglaNegocioException.class)
     public ResponseEntity<ErrorResponse> handleBusiness(ReglaNegocioException ex, HttpServletRequest req) {
         return build(HttpStatus.CONFLICT, ex.getMessage(), req, null);
+    }
+
+    @ExceptionHandler({ObjectOptimisticLockingFailureException.class, OptimisticLockException.class})
+    public ResponseEntity<ErrorResponse> handleOptimisticLock(Exception ex, HttpServletRequest req) {
+        log.warn("Conflicto de concurrencia al procesar compra en {}: {}", req.getRequestURI(), ex.getMessage());
+        return build(HttpStatus.CONFLICT, "Conflicto de concurrencia al procesar la orden. Por favor intente nuevamente.", req, null);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

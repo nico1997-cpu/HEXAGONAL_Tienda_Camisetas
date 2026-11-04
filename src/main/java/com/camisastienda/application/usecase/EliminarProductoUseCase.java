@@ -1,5 +1,6 @@
 package com.camisastienda.application.usecase;
 
+import com.camisastienda.application.port.in.EliminarProductoPort;
 import com.camisastienda.application.port.out.ProductoRepositoryPort;
 import com.camisastienda.domain.exception.ProductoNoEncontradoException;
 import com.camisastienda.domain.model.Producto;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class EliminarProductoUseCase {
+public class EliminarProductoUseCase implements EliminarProductoPort {
 
     private final ProductoRepositoryPort productoRepository;
 
@@ -20,6 +21,7 @@ public class EliminarProductoUseCase {
         this.productoRepository = productoRepository;
     }
 
+    @Override
     public void ejecutar(Long id) {
         Producto producto = productoRepository.buscarPorId(id)
                 .orElseThrow(() -> new ProductoNoEncontradoException(id));

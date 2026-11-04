@@ -1,5 +1,6 @@
 package com.camisastienda.application.usecase;
 
+import com.camisastienda.application.port.in.ListarProductosPort;
 import com.camisastienda.application.port.out.ProductoRepositoryPort;
 import com.camisastienda.domain.model.Producto;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Service
 @Transactional(readOnly = true)
-public class ListarProductosUseCase {
+public class ListarProductosUseCase implements ListarProductosPort {
 
     private final ProductoRepositoryPort productoRepository;
 
@@ -21,6 +22,7 @@ public class ListarProductosUseCase {
         this.productoRepository = productoRepository;
     }
 
+    @Override
     public List<Producto> ejecutar(String equipo, String liga, String nombre, String talla,
                                    int page, int size) {
         String eq = blankToNull(equipo);
